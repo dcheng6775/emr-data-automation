@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMR Data Automation</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <h1>EMR Data Extraction</h1>
+    <p> Please upload up to 3 echocardiogram files to analyze the data. <p>
+
+    <form action="/" method="post" enctype="multipart/form-data">
+      <div class="js-input1">
+      <input type="file" name="file1" required>
+      <button type="button" onclick="changetotext(1)">I want to add text instead. </button>
+      </div>
+      <div class="js-input2">
+      <input type="file" name="file2">
+      <button type="button" onclick="changetotext(2)">I want to add text instead. </button>
+      </div>
+      <div class="js-input3">
+      <input type="file" name="file3">
+      <button type="button" onclick="changetotext(3)">I want to add text instead. </button>
+      </div>
+      <button type="submit">Upload & Analyze</button>
+    </form>
+
+    {% if results %}
+    <div class="results">
+        <h3>Extracted Data:</h3>
+        <pre>{{ results | tojson(indent=2) }}</pre>
+    </div>
+    {% endif %}
+
+</body>
+</html>
