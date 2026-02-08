@@ -71,7 +71,11 @@ def extract_data(report_text):
         weight_kg = float(wt_str)
         height_m = height_cm / 100
         bmi = weight_kg / (height_m ** 2)
-        results["BMI"] = round(bmi, 1)
+        if bmi > 100 or bmi < 10:
+            bmi = (weight_kg / (height_cm ** 2)) * 703
+            results["BMI"] = round(bmi, 1)
+        elif bmi > 10 and bmi < 100:
+            results["BMI"] = round(bmi, 1)
     except (ValueError, TypeError):
         results["BMI"] = "NOT FOUND"
         

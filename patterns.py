@@ -32,4 +32,7 @@ PATTERNS = {
         r"hybrid|surgical"
         r")\s*ablation\b"
     ),
+    "LVEF (Lower Range)": (
+        r"(?i)(?:LVEF|EF|Left\s*ventricular\s*ejection\s*fraction).*?(\d{1,3})"
+    ),  
 }
