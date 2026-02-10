@@ -21,21 +21,18 @@ def extract_image_text(uploaded_file):
     return text
 
 def extract_text(uploaded_file, file_type=None):
-    if file_type is None:
-        filename= getattr(uploaded_file, 'filename', '')
-        if filename.lower().endswith(".pdf"):
-            file_type = "pdf"
-        elif filename.lower().endswith((".png", ".jpg", ".jpeg", ".tiff", ".bmp")):
-            file_type = "image"
-        else: 
-            file_type = "text"
-    if file_type == "text":
-        text = uploaded_file.read().decode("utf-8")  # or another encoding
-        return text
-    elif file_type == "pdf":
+    uploaded_file.seek(0)
+    filename = getattr(uploaded_file, 'filename', '')
+    
+    if filename.lower().endswith(".pdf"):
         return extract_pdf_text(uploaded_file)
-    elif file_type == "image":
+    elif filename.lower().endswith((".png", ".jpg", ".jpeg", ".tiff", ".bmp")):
         return extract_image_text(uploaded_file)
+    else:
+        try:
+            return uploaded_file.read().decode("utf-8")
+        except:
+            return ""
 
 def extract_data(report_text):
     results = {}
