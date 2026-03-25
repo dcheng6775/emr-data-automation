@@ -38,7 +38,6 @@ const App = () => {
         }
       }
     });
-
     try {
       const res = await fetch('http://localhost:5000/analyze', { method: 'POST', body: formData });
       const result = await res.json();
@@ -48,6 +47,27 @@ const App = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const downloadCSV = async () => {
+    const formData = new FormData();
+    inputs.forEach((input, i) => {
+      if (input.value) {
+        if (input.type === 'file') {
+          formData.append(`file${i + 1}`, input.value);
+        } else {
+          const blob = new Blob([input.value], { type: 'text/plain' });
+          formData.append(`file${i + 1}`, blob, `textinput${i+1}.txt`);
+        }
+      }
+    });
+    const res = await fetch('http://localhost:5000/export', { method: 'POST', body: formData });
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'emr_results.csv';
+    a.click();
   };
 
   return (
@@ -67,7 +87,7 @@ const App = () => {
                   <input type="file" className="hidden" onChange={(e) => handleInputChange(i, e.target.files[0])} />
                 </label>
               ) : (
-                <textarea 
+                <textarea
                   className="w-full h-full bg-transparent p-4 text-gray-800 placeholder-gray-600 outline-none resize-none"
                   placeholder="Paste clinical notes here..."
                   onChange={(e) => handleInputChange(i, e.target.value)}
@@ -85,14 +105,22 @@ const App = () => {
       </button>
       {data && (
         <div className="mt-12 w-full max-w-4xl bg-white rounded-xl p-6 shadow-lg">
-           <div className="grid grid-cols-2 gap-4">
-              {Object.entries(data).map(([key, val]) => (
-                <div key={key} className="border-b pb-2">
-                  <span className="font-semibold text-gray-600 uppercase text-xs">{key}:</span> <span className="text-blue-600 ml-2">{val}</span>
-                </div>
-              ))}
-           </div>
+          <div className="grid grid-cols-2 gap-4">
+            {Object.entries(data).map(([key, val]) => (
+              <div key={key} className="border-b pb-2">
+                <span className="font-semibold text-gray-600 uppercase text-xs">{key}:</span> <span className="text-blue-600 ml-2">{val}</span>
+              </div>
+            ))}
+          </div>
         </div>
+      )}
+      {data && (
+        <button
+          onClick={downloadCSV}
+          className="mt-6 bg-[#4CAF50] text-white px-12 py-3 rounded-[20px] text-xl font-medium"
+        >
+          Download CSV
+        </button>
       )}
     </div>
   );
