@@ -117,7 +117,7 @@ const App = () => {
       {data && (
         <button
           onClick={downloadCSV}
-          className="mt-6 bg-[#4CAF50] text-white px-12 py-3 rounded-[20px] text-xl font-medium"
+          className="mt-6 bg-[#AAB7D1] text-white px-12 py-3 rounded-[20px] text-xl font-medium"
         >
           Download CSV
         </button>
