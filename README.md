@@ -32,7 +32,7 @@ Install and open the app, wait for a whale icon to appear in the menu bar/taskba
 
 <ins>Step 2 — Download the code</ins>
 
-Go to this GitHub repo → click the green Code button → Download ZIP → unzip it somewhere easy like the Desktop.
+Go to this GitHub repo → click the green Code button → Download ZIP → unzip in the Desktop.
 
 <ins>Step 3 — Open terminal</ins>
 
