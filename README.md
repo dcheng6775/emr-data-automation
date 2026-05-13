@@ -50,15 +50,23 @@ as an example, if the folder name was emr-data-automation-main, you type:
 
 cd Desktop/emr-data-automation-main
 
+Then, press enter.
+
 
 <ins>Step 4 — Run it</ins>
 
+In terminal, type:
+
 docker compose up --build
+
+Then press enter.
 
 First time takes ~5 minutes. When it settles, open a browser and go to http://localhost:3000. You can now access the app.
 
 <ins>Step 5 — Stopping it</ins>
 
-Press Ctrl+C in the terminal, then run:
+Press Ctrl+C in the terminal, then type:
 
 docker compose down
+
+Then press enter.
