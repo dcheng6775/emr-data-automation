@@ -42,18 +42,18 @@ Windows: search "PowerShell" in the start menu
 
 Then type:
 
-bashcd Desktop/[folder name that it was unzipped as]
+cd Desktop/[folder name that it was unzipped as]
 
 (adjust the folder name to whatever it unzipped as)
 
 as an example, if the folder name was emr-data-automation-main, you type:
 
-bashcd Desktop/emr-data-automation-main
+cd Desktop/emr-data-automation-main
 
 
 <ins>Step 4 — Run it</ins>
 
-bashdocker compose up --build
+docker compose up --build
 
 First time takes ~5 minutes. When it settles, open a browser and go to http://localhost:3000. You can now access the app.
 
@@ -61,4 +61,4 @@ First time takes ~5 minutes. When it settles, open a browser and go to http://lo
 
 Press Ctrl+C in the terminal, then run:
 
-bashdocker compose down
+docker compose down
