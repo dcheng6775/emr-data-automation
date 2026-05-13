@@ -26,24 +26,34 @@ Other variables to be added & current variables are in the process of being test
 **Requirements & How to use**
 
 <ins>Step 1 — Download Docker Desktop</ins>
-Go to https://www.docker.com/products/docker-desktop and download for your OS (Mac or Windows). Install and open the app, wait for a whale icon to appear in the menu bar/taskbar.
+
+Go to https://www.docker.com/products/docker-desktop and download for your OS (Mac or Windows). 
+Install and open the app, wait for a whale icon to appear in the menu bar/taskbar.
 
 <ins>Step 2 — Download the code</ins>
+
 Go to this GitHub repo → click the green Code button → Download ZIP → unzip it somewhere easy like the Desktop.
 
 <ins>Step 3 — Open terminal</ins>
 
 Mac: search "Terminal" in Spotlight
+
 Windows: search "PowerShell" in the start menu
 
 Then type:
+
 bashcd Desktop/[folder name that it was unzipped as]
+
 (adjust the folder name to whatever it unzipped as)
 
 <ins>Step 4 — Run it</ins>
+
 bashdocker compose up --build
-First time takes ~5 minutes. When it settles, open a browser and go to http://localhost:3000.
+
+First time takes ~5 minutes. When it settles, open a browser and go to http://localhost:3000. You can now access the app.
 
 <ins>Step 5 — Stopping it</ins>
+
 Press Ctrl+C in the terminal, then run:
+
 bashdocker compose down
