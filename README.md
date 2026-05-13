@@ -46,6 +46,11 @@ bashcd Desktop/[folder name that it was unzipped as]
 
 (adjust the folder name to whatever it unzipped as)
 
+as an example, if the folder name was emr-data-automation-main, you type:
+
+bashcd Desktop/emr-data-automation-main
+
+
 <ins>Step 4 — Run it</ins>
 
 bashdocker compose up --build
