@@ -3,6 +3,7 @@ from flask_cors import CORS
 from utils import extract_text, extract_data
 import csv
 import io
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
@@ -36,15 +37,14 @@ def export():
         return jsonify({"error": "No files received"}), 400
 
     full_text = "\n".join(texts)
-    results = extract_data(full_text)
+    results = extract_data(full_text) 
 
-    output = io.StringIO()
-    writer = csv.writer(output)
-    writer.writerow(results.keys())
-    writer.writerow(results.values())
+    df = pd.DataFrame([results])
+    
+    csv_string = df.to_csv(index=False)
 
     return Response(
-        output.getvalue(),
+        csv_string,
         mimetype="text/csv",
         headers={"Content-Disposition": "attachment; filename=emr_results.csv"}
     )
