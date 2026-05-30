@@ -1,38 +1,51 @@
 PATTERNS = {
+ 
     "Name": (
-        r"Name:\s*['\"\s,]*([^,]+,\s*[^,\n]+?)(?=\s*Date:|\s*DOB:|\s*Age:|\n|\s*Sonographer:)"
+        r"(?:Name|Patient)\s*:\s*['\"\s]*"
+        r"([A-Za-z][A-Za-z'\-\.]+(?:,\s*[A-Za-z][A-Za-z'\-\.\s]+?)?)"
+        r"(?=\s*(?:\(|\d|Date:|DOB:|Age:|Sonographer:|\n))"
     ),
-
+ 
     "Age": (
-        r"Age:\s*(\d{1,3})\b"
+        r"(?:Age\s*:\s*|,\s*)(\d{1,3})\s*(?:years?)?\b"
+        r"(?!\s*(?:cm|kg|lb|lbs|mmHg|BPM|bpm|%))"
     ),
-
+ 
     "Sex": (
-        r"Sex:\s*([MF])\b"
+        r"(?:Sex\s*:\s*|\()([MF])\b"
     ),
-
+ 
     "Wt": (
-        r"Wt:\s*(\d{1,4}(\.\d)?)\b" 
+        r"Wt\s*:\s*(\d{1,4}(?:\.\d{1,2})?)\b"
     ),
-
+ 
     "Ht": (
-        r"Ht:\s*(\d{1,3}\.\d)\b"
+        r"Ht\s*:\s*(\d{1,3}(?:\.\d{1,2})?)\b"
     ),
-
+ 
     "AFib_Type": (
-        r"(?i)(paroxysmal|persistent|long[-\s]?standing\s*persistent)"
-        r"\s*(atrial\s*fibrillation|AF|a-fib|afib)"
+        r"(?i)\b(paroxysmal|persistent|long[-\s]?standing\s+persistent)\b"
+        r"(?:\s+(?:atrial\s+fibrillation|AF\b|a-?fib|afib))"
     ),
-
+ 
     "Ablation_Type": (
         r"(?i)\b("
-        r"pulmonary\s*vein\s*isolation|pvi|"
-        r"cavo[-\s]?tricuspid\s*isthmus\s*ablation|cti|"
-        r"radiofrequency|rf|cryo(?:thermal)?|catheter(?:\s*[-]?\s*ablation)?|"
-        r"hybrid|surgical"
-        r")\s*ablation\b"
+        r"pulmonary\s+vein\s+isolation|PVI|"
+        r"cavo[-\s]?tricuspid\s+isthmus(?:\s+ablation)?|CTI|"
+        r"radiofrequency\s+ablation|RF\s+ablation|"
+        r"cryo(?:thermal)?\s+ablation|"
+        r"catheter\s+ablation|"
+        r"hybrid\s+ablation|surgical\s+ablation"
+        r")\b"
     ),
+ 
     "LVEF (Lower Range)": (
-        r"(?i)(?:LVEF|EF|Left\s*ventricular\s*ejection\s*fraction).*?(\d{1,3})"
-    ),  
+        r"(?i)"
+        r"(?:"
+        r"(?:LVEF|Est\.?\s*EF|EF[-\s]?(?:A4C\s+View|A2C\s+View|Biplane|Simpsons?)?)"
+        r"\s*:?\s*(\d{1,3})(?:\.\d+)?"
+        r"|"
+        r"(?:ejection\s+fraction)\s+(?:[^.\n]{0,60}?)\b(\d{1,3})(?:\.\d+)?"
+        r")"
+    ),
 }
