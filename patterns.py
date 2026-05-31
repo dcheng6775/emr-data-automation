@@ -7,24 +7,24 @@ PATTERNS = {
     ),
  
     "Age": (
-        r"(?:(?:Age\s*:\s*)(\d{1,3})|(\d{1,3})\s+years?\b)"
+        r"(?:Age\s*:\s*(\d{1,3})|(\d{1,3})\s+years?\b)"
     ),
  
     "Sex": (
-        r"(?:Sex\s*[:.]\s*|\()([MF])\b"
+        r"Sex\s*[:.]\s*([MF])\b"
     ),
  
     "Wt": (
-        r"Wt\s*:\s*(\d{1,4}(?:\.\d{1,2})?)(?:[^\d]|$)"
+        r"Wt\s*:\s*(\d{1,4}(?:\.\d{1,2})?)(?=[^\d]|$)"
     ),
  
     "Ht": (
-        r"Ht\s*:\s*(\d{1,3}(?:\.\d{1,2})?)(?:[^\d]|$)"
+        r"Ht\s*:\s*(\d{1,3}(?:\.\d{1,2})?)(?=[^\d]|$)"
     ),
  
     "AFib_Type": (
-        r"(?i)\b(paroxysmal|persistent|long[-\s]?standing\s+persistent)\b"
-        r"(?:\s+(?:atrial\s+fibrillation|AF\b|a-?fib|afib))"
+        r"(?i)\b(long[-\s]?standing\s+persistent|paroxysmal|persistent)\b"
+        r"(?:\s+\S+){0,3}?\s+(?:atrial\s+fibrillation|AF\b|a-?fib|afib)"
     ),
  
     "Ablation_Type": (
@@ -32,7 +32,7 @@ PATTERNS = {
         r"pulmonary\s+vein\s+isolation|PVI|"
         r"cavo[-\s]?tricuspid\s+isthmus(?:\s+ablation)?|CTI|"
         r"radiofrequency\s+ablation|RF\s+ablation|"
-        r"cryo(?:thermal)?\s+ablation|"
+        r"cryo(?:balloon|thermal)?\s+ablation|"
         r"catheter\s+ablation|"
         r"hybrid\s+ablation|surgical\s+ablation"
         r")\b"
@@ -40,11 +40,11 @@ PATTERNS = {
  
     "LVEF (Lower Range)": (
         r"(?i)"
-        r"(?:"
-        r"(?:LVEF|Est\.?\s*EF|EF[-\s]?(?:A4C\s+View|A2C\s+View|Biplane|Simpsons?)?)"
-        r"\s*:?\s*(\d{1,3})(?:\.\d+)?"
+        r"(?:(?:LVEF|Est\.?\s*EF|EF[-\s]?(?:A4C\s+View|A2C\s+View|Biplane|Simpsons?)?))"
+        r"[^0-9\n]{0,20}"
+        r"(\d{1,3})(?:\.\d+)?"
         r"|"
-        r"(?:ejection\s+fraction)\s+(?:[^.\n]{0,60}?)\b(\d{1,3})(?:\.\d+)?"
-        r")"
+        r"ejection\s+fraction\b.{0,100}?"
+        r"\b(\d{1,3})(?:\.\d+)?\s*(?:[-\u2013]\s*\d{1,3}|\s+to\s+\d{1,3})?\s*%"
     ),
 }
